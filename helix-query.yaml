@@ -1,0 +1,20 @@
+indices:
+  properties:
+    source: /properties
+    target: /query-index.json
+    properties:
+      title:
+        select: head > title
+        value: attribute(content)
+      description:
+        select: meta[name="description"]
+        value: attribute(content)
+      image:
+        select: meta[property="og:image"]
+        value: attribute(content)
+      category:
+        select: meta[name="category"]
+        value: attribute(content)
+      price:
+        select: meta[name="price"]
+        value: attribute(content)
