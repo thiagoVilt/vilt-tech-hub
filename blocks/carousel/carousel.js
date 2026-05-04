@@ -1,3 +1,15 @@
+function moveSlide(block, direction) {
+  const slides = block.querySelectorAll('.carousel-slide');
+  const active = block.querySelector('.carousel-slide.active');
+  let nextIndex = [...slides].indexOf(active) + direction;
+
+  if (nextIndex >= slides.length) nextIndex = 0;
+  if (nextIndex < 0) nextIndex = slides.length - 1;
+
+  active.classList.remove('active');
+  slides[nextIndex].classList.add('active');
+}
+
 export default function decorate(block) {
   const slides = [...block.children];
   block.textContent = '';
@@ -41,16 +53,4 @@ export default function decorate(block) {
   // Lógica simples de clique
   nav.querySelector('.next').onclick = () => moveSlide(block, 1);
   nav.querySelector('.prev').onclick = () => moveSlide(block, -1);
-}
-
-function moveSlide(block, direction) {
-  const slides = block.querySelectorAll('.carousel-slide');
-  const active = block.querySelector('.carousel-slide.active');
-  let nextIndex = [...slides].indexOf(active) + direction;
-
-  if (nextIndex >= slides.length) nextIndex = 0;
-  if (nextIndex < 0) nextIndex = slides.length - 1;
-
-  active.classList.remove('active');
-  slides[nextIndex].classList.add('active');
 }

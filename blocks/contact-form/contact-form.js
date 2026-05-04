@@ -12,7 +12,7 @@ export default function decorate(block) {
 
     const label = document.createElement('label');
     label.textContent = labelName.textContent;
-    
+
     let input;
     if (type.textContent.trim().toLowerCase() === 'textarea') {
       input = document.createElement('textarea');
@@ -39,7 +39,7 @@ export default function decorate(block) {
   // Lógica de envio (Exemplo simples)
   form.onsubmit = (e) => {
     e.preventDefault();
-    alert('Thank you! Vilt Tech Hub will contact you soon.');
+    // alert('Thank you! Vilt Tech Hub will contact you soon.');
     form.reset();
   };
 

@@ -107,7 +107,7 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
     nav.removeEventListener('focusout', closeOnFocusLost);
   }
 }
- 
+
 /**
  * loads and decorates the header, mainly the nav
  * @param {Element} block The header block element
@@ -139,7 +139,8 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
 
 //   const navSections = nav.querySelector('.nav-sections');
 //   if (navSections) {
-//     navSections.querySelectorAll(':scope .default-content-wrapper > ul > li').forEach((navSection) => {
+//     navSections.querySelectorAll(':scope .default-content-wrapper > ul > li').forEach(
+//       (navSection) => {
 //       if (navSection.querySelector('ul')) navSection.classList.add('nav-drop');
 //       navSection.addEventListener('click', () => {
 //         if (isDesktop.matches) {
@@ -178,7 +179,7 @@ export default async function decorate(block) {
   block.textContent = '';
   const nav = document.createElement('nav');
   nav.id = 'nav';
-  
+
   while (fragment.firstElementChild) nav.append(fragment.firstElementChild);
 
   // --- NOVA LÓGICA DE ESTRUTURA E NOMENCLATURA ---
@@ -234,7 +235,7 @@ export default async function decorate(block) {
   hamburger.addEventListener('click', () => toggleMenu(nav, sections)); // Ajustado para sections
   nav.prepend(hamburger);
   nav.setAttribute('aria-expanded', 'false');
-  
+
   toggleMenu(nav, sections, isDesktop.matches);
   isDesktop.addEventListener('change', () => toggleMenu(nav, sections, isDesktop.matches));
 

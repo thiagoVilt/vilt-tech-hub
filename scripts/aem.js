@@ -591,15 +591,33 @@ function decorateBlocks(main) {
  * @param {Element} header header element
  * @returns {Promise}
  */
+/**
+ * Loads a block named 'header' into header
+ * @param {Element} header header element
+ * @returns {Promise}
+ */
 async function loadHeader(header) {
-  if (!header) return;
-  // Limpa o conteúdo atual para evitar duplicidade
-  header.innerHTML = ''; 
-  
-  const headerBlock = buildBlock('header', '');
-  header.append(headerBlock);
-  decorateBlock(headerBlock);
-  return loadBlock(headerBlock);
+  if (header) {
+    header.innerHTML = '';
+    const headerBlock = buildBlock('header', '');
+    header.append(headerBlock);
+    decorateBlock(headerBlock);
+    await loadBlock(headerBlock);
+  }
+}
+
+/**
+ * Loads a block named 'footer' into footer
+ * @param footer footer element
+ * @returns {Promise}
+ */
+async function loadFooter(footer) {
+  if (footer) {
+    const footerBlock = buildBlock('footer', '');
+    footer.append(footerBlock);
+    decorateBlock(footerBlock);
+    await loadBlock(footerBlock);
+  }
 }
 // async function loadHeader(header) {
 //   const headerBlock = buildBlock('header', '');
@@ -608,17 +626,13 @@ async function loadHeader(header) {
 //   return loadBlock(headerBlock);
 // }
 
-/**
- * Loads a block named 'footer' into footer
- * @param footer footer element
- * @returns {Promise}
- */
-async function loadFooter(footer) {
-  const footerBlock = buildBlock('footer', '');
-  footer.append(footerBlock);
-  decorateBlock(footerBlock);
-  return loadBlock(footerBlock);
-}
+
+// async function loadFooter(footer) {
+//   const footerBlock = buildBlock('footer', '');
+//   footer.append(footerBlock);
+//   decorateBlock(footerBlock);
+//   return loadBlock(footerBlock);
+// }
 
 /**
  * Wait for Image.

@@ -45,23 +45,23 @@ export default async function decorate(block) {
   // 3. Criar barra de filtros (Mesma lógica anterior)
   const filterNav = document.createElement('ul');
   filterNav.classList.add('properties-filter');
-  
+
   categories.forEach((cat) => {
     const li = document.createElement('li');
     const button = document.createElement('button');
     button.textContent = cat;
     if (cat === 'Show All') button.classList.add('is-active');
-    
+
     button.addEventListener('click', () => {
       filterNav.querySelector('.is-active').classList.remove('is-active');
       button.classList.add('is-active');
-      
+
       const filter = button.textContent;
       cardsContainer.querySelectorAll('.property-card').forEach((card) => {
         card.style.display = (filter === 'Show All' || card.dataset.category === filter) ? 'block' : 'none';
       });
     });
-    
+
     li.append(button);
     filterNav.append(li);
   });
