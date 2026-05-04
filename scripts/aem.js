@@ -626,7 +626,6 @@ async function loadFooter(footer) {
 //   return loadBlock(headerBlock);
 // }
 
-
 // async function loadFooter(footer) {
 //   const footerBlock = buildBlock('footer', '');
 //   footer.append(footerBlock);
