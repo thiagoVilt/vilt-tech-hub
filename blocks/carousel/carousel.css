@@ -100,7 +100,7 @@
 }
 
 .carousel-nav button {
-  background: rgba(255, 255, 255, 0.3);
+  background: rgb(255 255 255 / 30%);
   border: none;
   width: 50px;
   height: 50px;

@@ -4,12 +4,12 @@
   background: #fdfdfd;
   padding: 40px;
   border-radius: 15px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  box-shadow: 0 10px 30px rgb(0 0 0 / 5%);
 }
 
 .vilt-form {
   display: grid;
-  grid-template-columns: 1fr 1fr; /* Duas colunas */
+  grid-template-columns: 1fr 1fr;
   gap: 20px;
 }
 
@@ -42,14 +42,14 @@
   transition: border 0.3s;
 }
 
-.form-field input:focus,
-.form-field textarea:focus {
-  border-color: #f35525;
-}
-
 .form-field textarea {
   height: 150px;
   resize: vertical;
+}
+
+.form-field input:focus,
+.form-field textarea:focus {
+  border-color: #f35525;
 }
 
 .form-submit {
@@ -70,10 +70,11 @@
 }
 
 /* Responsividade */
-@media (max-width: 600px) {
+@media (width <= 600px) {
   .vilt-form {
     grid-template-columns: 1fr;
   }
+
   .form-field {
     grid-column: span 1 !important;
   }

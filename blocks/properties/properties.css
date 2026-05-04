@@ -5,8 +5,7 @@
   gap: 15px;
   list-style: none;
   padding: 0;
-  margin: 0 auto 50px auto;
-  width: 100%;
+  margin: 0 auto 50px;
   flex-wrap: nowrap;
 }
 
@@ -34,12 +33,18 @@
 /* --- 2. CONTAINER DE CARDS (Trava de 3 Colunas) --- */
 .properties-container {
   display: grid;
+
   /* FORÇA 3 colunas de 350px. Isso evita que 1 card pule para o centro */
-  grid-template-columns: repeat(3, 350px); 
+  grid-template-columns: repeat(3, 350px);
   justify-content: center; /* Centraliza o bloco de 3 colunas na tela */
   gap: 30px;
   margin: 0 auto;
   min-height: 600px;
+}
+
+/* Se o card estiver oculto pelo filtro, ele não deve ocupar espaço */
+.property-card[style*="display: none"] {
+  display: none;
 }
 
 /* --- 3. ESTILO DO CARD --- */
@@ -47,15 +52,10 @@
   background: #fafafa;
   border-radius: 10px;
   padding: 30px;
-  box-shadow: 0px 0px 15px rgba(0,0,0,0.1);
+  box-shadow: 0 0 15px rgb(0 0 0 / 10%);
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-}
-
-/* Se o card estiver oculto pelo filtro, ele não deve ocupar espaço */
-.property-card[style*="display: none"] {
-  display: none;
 }
 
 .property-card .card-image img {
@@ -69,7 +69,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 25px 0 15px 0;
+  margin: 25px 0 15px;
 }
 
 .property-card .category-tag {
@@ -100,7 +100,7 @@
   grid-template-columns: 1fr 1fr;
   gap: 10px;
   border-bottom: 1px solid #eee;
-  padding: 0 0 20px 0;
+  padding: 0 0 20px;
   margin: 20px 0;
   list-style: none;
 }
@@ -117,16 +117,17 @@
 }
 
 /* RESPONSIVIDADE: Ajusta para 2 ou 1 coluna em telas menores */
-@media (max-width: 1150px) {
+@media (width <= 1150px) {
   .properties-container {
     grid-template-columns: repeat(2, 350px);
   }
 }
 
-@media (max-width: 800px) {
+@media (width <= 800px) {
   .properties-container {
     grid-template-columns: 350px;
   }
+
   .properties-filter {
     justify-content: flex-start;
     overflow-x: auto;
