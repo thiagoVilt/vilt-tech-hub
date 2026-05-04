@@ -5,7 +5,7 @@ indices:
     properties:
       title:
         select: head > title
-        value: attribute(content)
+        value: text
       description:
         select: meta[name="description"]
         value: attribute(content)
