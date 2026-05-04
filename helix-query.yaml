@@ -1,6 +1,8 @@
 indices:
   properties:
-    source: /properties
+    # Mude 'source' para 'include' e use o padrão de glob (**)
+    include:
+      - /properties/**
     target: /query-index.json
     properties:
       title:
