@@ -1,0 +1,80 @@
+.contact-form {
+  max-width: 800px;
+  margin: 0 auto;
+  background: #fdfdfd;
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+.vilt-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Duas colunas */
+  gap: 20px;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Campos que ocupam a linha toda (Subject e Message) */
+.form-field.field-textarea,
+.form-field:nth-child(3) {
+  grid-column: span 2;
+}
+
+.form-field label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1e1e1e;
+}
+
+.form-field input,
+.form-field textarea {
+  padding: 15px;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  background: #f4f4f4;
+  font-family: inherit;
+  outline: none;
+  transition: border 0.3s;
+}
+
+.form-field input:focus,
+.form-field textarea:focus {
+  border-color: #f35525;
+}
+
+.form-field textarea {
+  height: 150px;
+  resize: vertical;
+}
+
+.form-submit {
+  grid-column: span 2;
+  background-color: #f35525;
+  color: #fff;
+  border: none;
+  padding: 15px;
+  border-radius: 25px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s;
+  margin-top: 10px;
+}
+
+.form-submit:hover {
+  background-color: #1e1e1e;
+}
+
+/* Responsividade */
+@media (max-width: 600px) {
+  .vilt-form {
+    grid-template-columns: 1fr;
+  }
+  .form-field {
+    grid-column: span 1 !important;
+  }
+}

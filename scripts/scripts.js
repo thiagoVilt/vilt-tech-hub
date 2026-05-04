@@ -183,6 +183,7 @@ function loadDelayed() {
 async function loadPage() {
   await loadEager(document);
   await loadLazy(document);
+  await loadHeader(document.querySelector('header'));
   loadDelayed();
 }
 

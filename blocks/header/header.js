@@ -107,62 +107,136 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
     nav.removeEventListener('focusout', closeOnFocusLost);
   }
 }
-
+ 
 /**
  * loads and decorates the header, mainly the nav
  * @param {Element} block The header block element
  */
+// export default async function decorate(block) {
+//   // load nav as fragment
+//   const navMeta = getMetadata('nav');
+//   const navPath = navMeta ? new URL(navMeta, window.location).pathname : '/nav';
+//   const fragment = await loadFragment(navPath);
+
+//   // decorate nav DOM
+//   block.textContent = '';
+//   const nav = document.createElement('nav');
+//   nav.id = 'nav';
+//   while (fragment.firstElementChild) nav.append(fragment.firstElementChild);
+
+//   const classes = ['brand', 'sections', 'tools'];
+//   classes.forEach((c, i) => {
+//     const section = nav.children[i];
+//     if (section) section.classList.add(`nav-${c}`);
+//   });
+
+//   const navBrand = nav.querySelector('.nav-brand');
+//   const brandLink = navBrand.querySelector('.button');
+//   if (brandLink) {
+//     brandLink.className = '';
+//     brandLink.closest('.button-container').className = '';
+//   }
+
+//   const navSections = nav.querySelector('.nav-sections');
+//   if (navSections) {
+//     navSections.querySelectorAll(':scope .default-content-wrapper > ul > li').forEach((navSection) => {
+//       if (navSection.querySelector('ul')) navSection.classList.add('nav-drop');
+//       navSection.addEventListener('click', () => {
+//         if (isDesktop.matches) {
+//           const expanded = navSection.getAttribute('aria-expanded') === 'true';
+//           toggleAllNavSections(navSections);
+//           navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+//         }
+//       });
+//     });
+//   }
+
+//   // hamburger for mobile
+//   const hamburger = document.createElement('div');
+//   hamburger.classList.add('nav-hamburger');
+//   hamburger.innerHTML = `<button type="button" aria-controls="nav" aria-label="Open navigation">
+//       <span class="nav-hamburger-icon"></span>
+//     </button>`;
+//   hamburger.addEventListener('click', () => toggleMenu(nav, navSections));
+//   nav.prepend(hamburger);
+//   nav.setAttribute('aria-expanded', 'false');
+//   // prevent mobile nav behavior on window resize
+//   toggleMenu(nav, navSections, isDesktop.matches);
+//   isDesktop.addEventListener('change', () => toggleMenu(nav, navSections, isDesktop.matches));
+
+//   const navWrapper = document.createElement('div');
+//   navWrapper.className = 'nav-wrapper';
+//   navWrapper.append(nav);
+//   block.append(navWrapper);
+// }
+
 export default async function decorate(block) {
-  // load nav as fragment
   const navMeta = getMetadata('nav');
   const navPath = navMeta ? new URL(navMeta, window.location).pathname : '/nav';
   const fragment = await loadFragment(navPath);
 
-  // decorate nav DOM
   block.textContent = '';
   const nav = document.createElement('nav');
   nav.id = 'nav';
+  
   while (fragment.firstElementChild) nav.append(fragment.firstElementChild);
 
-  const classes = ['brand', 'sections', 'tools'];
-  classes.forEach((c, i) => {
-    const section = nav.children[i];
-    if (section) section.classList.add(`nav-${c}`);
-  });
+  // --- NOVA LÓGICA DE ESTRUTURA E NOMENCLATURA ---
+  // Mapeamos as seções do Google Doc para os nomes semânticos
+  const contact = nav.children[0];
+  const brand = nav.children[1];
+  const sections = nav.children[2];
 
-  const navBrand = nav.querySelector('.nav-brand');
-  const brandLink = navBrand.querySelector('.button');
-  if (brandLink) {
-    brandLink.className = '';
-    brandLink.closest('.button-container').className = '';
+  if (contact) contact.classList.add('nav-contact');
+  if (brand) brand.classList.add('nav-brand');
+  if (sections) sections.classList.add('nav-sections');
+
+  // Criamos o container para agrupar Logo (brand) e Links (sections)
+  const mainNavContainer = document.createElement('div');
+  mainNavContainer.classList.add('main-nav-container');
+
+  // Movemos Brand e Sections para dentro do container agrupador
+  if (brand && sections) {
+    brand.after(mainNavContainer);
+    mainNavContainer.append(brand);
+    mainNavContainer.append(sections);
   }
 
-  const navSections = nav.querySelector('.nav-sections');
-  if (navSections) {
-    navSections.querySelectorAll(':scope .default-content-wrapper > ul > li').forEach((navSection) => {
+  // --- AJUSTES DE DECORAÇÃO (Mantendo compatibilidade com seu código) ---
+  if (brand) {
+    const brandLink = brand.querySelector('.button');
+    if (brandLink) {
+      brandLink.className = '';
+      brandLink.closest('.button-container').className = '';
+    }
+  }
+
+  // O navSections agora é a nossa div de links (antiga ferramentas/tools)
+  if (sections) {
+    sections.querySelectorAll(':scope .default-content-wrapper > ul > li').forEach((navSection) => {
       if (navSection.querySelector('ul')) navSection.classList.add('nav-drop');
       navSection.addEventListener('click', () => {
         if (isDesktop.matches) {
           const expanded = navSection.getAttribute('aria-expanded') === 'true';
-          toggleAllNavSections(navSections);
+          toggleAllNavSections(sections); // Ajustado para a nova variável
           navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
         }
       });
     });
   }
 
-  // hamburger for mobile
+  // Hamburger para mobile (mantido conforme original)
   const hamburger = document.createElement('div');
   hamburger.classList.add('nav-hamburger');
   hamburger.innerHTML = `<button type="button" aria-controls="nav" aria-label="Open navigation">
       <span class="nav-hamburger-icon"></span>
     </button>`;
-  hamburger.addEventListener('click', () => toggleMenu(nav, navSections));
+  hamburger.addEventListener('click', () => toggleMenu(nav, sections)); // Ajustado para sections
   nav.prepend(hamburger);
   nav.setAttribute('aria-expanded', 'false');
-  // prevent mobile nav behavior on window resize
-  toggleMenu(nav, navSections, isDesktop.matches);
-  isDesktop.addEventListener('change', () => toggleMenu(nav, navSections, isDesktop.matches));
+  
+  toggleMenu(nav, sections, isDesktop.matches);
+  isDesktop.addEventListener('change', () => toggleMenu(nav, sections, isDesktop.matches));
 
   const navWrapper = document.createElement('div');
   navWrapper.className = 'nav-wrapper';

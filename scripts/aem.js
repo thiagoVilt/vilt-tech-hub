@@ -592,11 +592,21 @@ function decorateBlocks(main) {
  * @returns {Promise}
  */
 async function loadHeader(header) {
+  if (!header) return;
+  // Limpa o conteúdo atual para evitar duplicidade
+  header.innerHTML = ''; 
+  
   const headerBlock = buildBlock('header', '');
   header.append(headerBlock);
   decorateBlock(headerBlock);
   return loadBlock(headerBlock);
 }
+// async function loadHeader(header) {
+//   const headerBlock = buildBlock('header', '');
+//   header.append(headerBlock);
+//   decorateBlock(headerBlock);
+//   return loadBlock(headerBlock);
+// }
 
 /**
  * Loads a block named 'footer' into footer

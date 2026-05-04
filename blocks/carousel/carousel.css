@@ -1,0 +1,119 @@
+/* 1. RESET DE SEÇÃO (Para ocupar 100% da largura) */
+.section.carousel-container.full-width {
+  padding: 0;
+  margin: 0;
+  max-width: none;
+}
+
+.section.carousel-container.full-width > div {
+  max-width: none;
+  padding: 0;
+}
+
+/* 2. ESTRUTURA DO CARROSSEL */
+.carousel {
+  position: relative;
+  width: 100%;
+  height: 85vh; /* Altura controlada */
+  min-height: 550px;
+  max-height: 850px;
+  overflow: hidden;
+  background-color: #222;
+}
+
+.carousel .slides-wrapper {
+  position: relative;
+  height: 100%;
+}
+
+/* 3. LÓGICA DE INTERAÇÃO (Essencial para o JS funcionar) */
+.carousel-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0; /* Todos começam invisíveis */
+  visibility: hidden;
+  transition: opacity 0.8s ease-in-out, visibility 0.8s;
+  display: flex;
+  align-items: center;
+}
+
+.carousel-slide.active {
+  opacity: 1;      /* Apenas o ativo aparece */
+  visibility: visible;
+  z-index: 1;
+}
+
+/* 4. AJUSTE DE IMAGEM (Object-fit para não distorcer) */
+.carousel .slide-image {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+}
+
+.carousel .slide-image picture,
+.carousel .slide-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 5. ESTILO DO TEXTO (Villa Agency Style) */
+.carousel .slide-text {
+  position: relative;
+  z-index: 2;
+  padding-left: 10%;
+  max-width: 650px;
+  color: #fff;
+  text-align: left;
+}
+
+/* A tag de localização (Ex: Toronto, Canada) */
+.carousel .location-tag {
+  background: #fff;
+  color: #1e1e1e;
+  padding: 8px 18px;
+  display: inline-block;
+  font-weight: 500;
+  margin-bottom: 25px;
+  border-left: 5px solid #f35525; /* Laranja do template */
+  font-size: 16px;
+}
+
+.carousel h1 {
+  font-size: 56px;
+  text-transform: uppercase;
+  line-height: 1.2;
+  font-weight: 900;
+  color: #fff;
+  margin: 0;
+  letter-spacing: 1px;
+}
+
+/* 6. NAVEGAÇÃO (Botões de Próximo/Anterior) */
+.carousel-nav {
+  position: absolute;
+  bottom: 40px;
+  right: 10%;
+  z-index: 3;
+  display: flex;
+  gap: 15px;
+}
+
+.carousel-nav button {
+  background: rgba(255, 255, 255, 0.3);
+  border: none;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s;
+}
+
+.carousel-nav button:hover {
+  background: #f35525;
+}
